@@ -8,7 +8,7 @@ const mongoose = require("mongoose");
 const app = express();
 
 mongoose.connect(
-  "mongodb+srv://sayam:eduprac@eduprac.zy2wn.mongodb.net/QuestionsDB?retryWrites=true&w=majority",
+  "key",
   { useNewUrlParser: true }
 );
 
