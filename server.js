@@ -1,25 +1,31 @@
-require("dotenv").config();
-const express = require("express");
-const cors = require("cors");
-const questionRoute = require("./routes/questionRoute");
-const bodyParser = require("body-parser");
-const mongoose = require("mongoose");
+require("dotenv").config()
+const path = require('path')
+const cors = require("cors")
+const express = require("express")
+const mongoose = require("mongoose")
+const bodyParser = require("body-parser")
+const questionRoute = require("./routes/questionRoute")
 
-const app = express();
+const app = express()
 
-mongoose.connect(
-  "key",
-  { useNewUrlParser: true }
-);
+mongoose.connect(process.env.QUESTION_DB, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
 
-app.use(bodyParser.json({ extended: true }));
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors());
+app.use(cors())
+app.use(express.json())
+app.use(bodyParser.urlencoded({ extended: true }))
 
-app.use("/", questionRoute);
+app.use(express.static(__dirname + '/pages'))
 
-PORT = process.env.PORT || 5000;
+app.use("/", questionRoute)
+app.get("/admin", (req, res) => {
+  res.sendFile(path.join(__dirname, "pages", "admin.html"))
+})
+
+PORT = process.env.PORT || 5000
 
 app.listen(PORT, () => {
-  console.log(`server running on port ${PORT}.`);
-});
+  console.log(`server running on port ${PORT}.`)
+})
