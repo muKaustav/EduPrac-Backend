@@ -35,7 +35,15 @@
                 <input type="text" name="book" placeholder="book" required>
                 <input type="text" name="chapterName" placeholder="chapterName" required>
                 <input type="text" name="chapterInfo" placeholder="chapterInfo" required>
-                <input type="text" name="correctOption" placeholder="correctOption" required>
+                <label for=""><span style="color: rgb(177, 177, 177); font-size: 0.7em;">Select correct option ↓</span>
+                    <br>
+                    <select name="correctOption" required>
+                        <option value="option1">option1</option>
+                        <option value="option2">option2</option>
+                        <option value="option3">option3</option>
+                        <option value="option4">option4</option>
+                    </select>
+                </label>
                 <textarea name="detailedAnswer" placeholder="detailedAnswer" cols="30" rows="10" class="answer"
                     required></textarea>
             </div>
