@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="/admin.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500&display=swap" rel="stylesheet">
+        <title>Admin Portal</title>
+    </head>
+
+    <body>
+        <h1 class="salutation">EduPrep Admin</h1>
+        <form action="/questions" method="POST" class="question-form">
+            <div class="col1">
+                <input type="text" name="questionId" placeholder="questionId" required>
+                <input type="text" name="chapterId" placeholder="chapterId" required>
+                <input type="text" name="subjectId" placeholder="subjectId" required>
+                <input type="text" name="difficulty" placeholder="difficulty" required>
+            </div>
+            <div class="col2">
+                <input type="text" name="option1" placeholder="option1" required>
+                <input type="text" name="option2" placeholder="option2" required>
+                <input type="text" name="option3" placeholder="option3" required>
+                <input type="text" name="option4" placeholder="option4" required>
+            </div>
+            <div class="col3">
+                <input type="text" name="book" placeholder="book">
+                <input type="text" name="chapterName" placeholder="chapterName" required>
+                <input type="text" name="chapterInfo" placeholder="chapterInfo" required>
+                <input type="text" name="correctOption" placeholder="correctOption" required>
+                <textarea name="detailedAnswer" placeholder="detailedAnswer" cols="30" rows="10"
+                    class="answer"></textarea>
+            </div>
+            <button type="submit" name="submit" value="Submit" class="submit-button">Submit</button>
+        </form>
+    </body>
+
+</html>

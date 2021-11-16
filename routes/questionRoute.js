@@ -1,10 +1,10 @@
-require("dotenv").config();
-const express = require("express");
-const questionRoute = require("../controllers/questionController");
+require("dotenv").config()
+const express = require("express")
+const questionRoute = require("../controllers/questionController")
 
-router = express.Router();
+router = express.Router()
 
-router.get("/arjo/questions", questionRoute.getQuestions);
-router.post("/arjo/questions", questionRoute.postQuestion);
+router.get("/questions", questionRoute.getQuestions)
+router.post("/questions", questionRoute.postQuestion)
 
-module.exports = router;
+module.exports = router
