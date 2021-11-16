@@ -5,6 +5,7 @@ const questionSchema = new mongoose.Schema({
   chapterId: String,
   subjectId: String,
   difficulty: String,
+  detailedQuestion: String,
   data: {
     options: {
       option1: String,
