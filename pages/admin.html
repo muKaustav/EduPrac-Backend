@@ -16,8 +16,13 @@
         <h1 class="salutation">EduPrep Admin</h1>
         <form action="/questions" method="POST" class="question-form">
             <div class="col1">
-                <input type="text" name="chapterId" placeholder="chapterId" required>
-                <input type="text" name="subjectId" placeholder="subjectId" required>
+                <label for=""><span style="color: rgb(177, 177, 177); font-size: 0.7em;">Select Chapter ↓</span><br>
+                    <select name="chapterId" id="chapterId" required></select>
+                </label>
+                <label for=""><span style="color: rgb(177, 177, 177); font-size: 0.7em;">Select Subject ↓</span><br>
+                    <select name="subjectId" id="subjectId" required></select>
+                </label>
+
                 <label for=""><span style="color: rgb(177, 177, 177); font-size: 0.7em;">Select difficulty ↓</span>
                     <br>
                     <select name="difficulty" required>
@@ -53,6 +58,179 @@
             </div>
             <button type="submit" name="submit" value="Submit" class="submit-button">Submit</button>
         </form>
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script>
+            $(() => {
+                var data = [{
+                        "id": "B111",
+                        "name": "\ufeffThe Living World"
+                    },
+                    {
+                        "id": "B112",
+                        "name": "Biological Classification"
+                    },
+                    {
+                        "id": "B113",
+                        "name": "Plant Kingdom"
+                    },
+                    {
+                        "id": "B114",
+                        "name": "Animal Kingdom"
+                    },
+                    {
+                        "id": "B115",
+                        "name": "Morphology of Flowering Plants"
+                    },
+                    {
+                        "id": "B116",
+                        "name": "Anatomy of Flowering Plants"
+                    },
+                    {
+                        "id": "B117",
+                        "name": "Structural Organisation in Animals"
+                    },
+                    {
+                        "id": "B118",
+                        "name": "Cell : The Unit of Life"
+                    },
+                    {
+                        "id": "B119",
+                        "name": "Biomolecules"
+                    },
+                    {
+                        "id": "B1110",
+                        "name": "Cell Cycle and Cell Division"
+                    },
+                    {
+                        "id": "B1111",
+                        "name": "Transport in Plants"
+                    },
+                    {
+                        "id": "B1112",
+                        "name": "Mineral Nutrition"
+                    },
+                    {
+                        "id": "B1113",
+                        "name": "Photosynthesis in Higher Plants"
+                    },
+                    {
+                        "id": "B1114",
+                        "name": "Respiration in Plants"
+                    },
+                    {
+                        "id": "B1115",
+                        "name": "Plant Growth and Development"
+                    },
+                    {
+                        "id": "B1116",
+                        "name": "Digestion and Absorption"
+                    },
+                    {
+                        "id": "B1117",
+                        "name": "Breathing and Exchange of Gases"
+                    },
+                    {
+                        "id": "B1118",
+                        "name": "Body Fluids and Circulation"
+                    },
+                    {
+                        "id": "B1119",
+                        "name": "Excretory Products and their Elimination"
+                    },
+                    {
+                        "id": "B1120",
+                        "name": "Locomotion and Movement"
+                    },
+                    {
+                        "id": "B1121",
+                        "name": "Neural Control and Coordination"
+                    },
+                    {
+                        "id": "B1122",
+                        "name": "Chemical Coordination and Integration"
+                    },
+                    {
+                        "id": "B121",
+                        "name": "Reproduction in Organisms"
+                    },
+                    {
+                        "id": "B122",
+                        "name": "Sexual Reproduction in Flowering Plants"
+                    },
+                    {
+                        "id": "B123",
+                        "name": "Human Reproduction"
+                    },
+                    {
+                        "id": "B124",
+                        "name": "Reproductive Health"
+                    },
+                    {
+                        "id": "B125",
+                        "name": "Principles of Inheritance and Variation"
+                    },
+                    {
+                        "id": "B126",
+                        "name": "Molecular Basis of Inheritance"
+                    },
+                    {
+                        "id": "B127",
+                        "name": "Evolution"
+                    },
+                    {
+                        "id": "B128",
+                        "name": "Human Health and Disease"
+                    },
+                    {
+                        "id": "B129",
+                        "name": "Strategies for Enhancement in Food Production"
+                    },
+                    {
+                        "id": "B1210",
+                        "name": "Microbes in Human Welfare"
+                    },
+                    {
+                        "id": "B1211",
+                        "name": "Biotechnology : Principles and Processes"
+                    },
+                    {
+                        "id": "B1212",
+                        "name": "Biotechnology and its Applications"
+                    },
+                    {
+                        "id": "B1213",
+                        "name": "Organisms and Populations"
+                    },
+                    {
+                        "id": "B1214",
+                        "name": "Ecosystem"
+                    },
+                    {
+                        "id": "B1215",
+                        "name": "Biodiversity and Conservation"
+                    },
+                    {
+                        "id": "B1216",
+                        "name": "Environmental Issues"
+                    }
+                ];
+                $.each(data, (i, option) => {
+                    $('#chapterId').append($('<option/>').attr("value", option.id).text(option.name));
+                });
+            })
+
+            $(() => {
+                var data = [{
+                    "id": "B",
+                    "name": "Biology"
+                }];
+                $.each(data, (i, option) => {
+                    $('#subjectId').append($('<option/>').attr("value", option.id).text(option.name));
+                });
+            })
+        </script>
+
     </body>
 
 </html>
