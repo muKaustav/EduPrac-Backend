@@ -19,11 +19,16 @@
                 <input type="text" name="questionId" placeholder="questionId" required>
                 <input type="text" name="chapterId" placeholder="chapterId" required>
                 <input type="text" name="subjectId" placeholder="subjectId" required>
-                <select name="difficulty" required>
-                    <option value="Easy">Easy</option>
-                    <option value="Medium">Medium</option>
-                    <option value="Difficult">Difficult</option>
-                </select>
+                <label for=""><span style="color: rgb(177, 177, 177); font-size: 0.7em;">Select difficulty ↓</span>
+                    <br>
+                    <select name="difficulty" required>
+                        <option value="Easy">Easy</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Difficult">Difficult</option>
+                    </select>
+                </label>
+                <textarea name="detailedQuestion" placeholder="detailedQuestion" cols="30" rows="10" class="answer"
+                    required></textarea>
             </div>
             <div class="col2">
                 <input type="text" name="option1" placeholder="option1" required>

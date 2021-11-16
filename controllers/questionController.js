@@ -19,13 +19,15 @@ exports.getQuestions = (req, res) => {
 exports.postQuestion = (req, res) => {
   const Data = mongoose.model("questions", question)
 
-  let html = snarkdown(req.body.detailedAnswer)
+  let q = snarkdown(req.body.detailedQuestion)
+  let ans = snarkdown(req.body.detailedAnswer)
 
   const newData = new Data({
     questionId: req.body.questionId,
     chapterId: req.body.chapterId,
     subjectId: req.body.subjectId,
     difficulty: req.body.difficulty,
+    detailedQuestion: q,
     data: {
       options: {
         option1: req.body.option1,
@@ -39,7 +41,7 @@ exports.postQuestion = (req, res) => {
         chapterName: req.body.chapterName,
         chapterInfo: req.body.chapterInfo,
         correctOption: req.body.correctOption,
-        detailedAnswer: html
+        detailedAnswer: ans
       },
     },
   })
