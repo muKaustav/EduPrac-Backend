@@ -1,7 +1,7 @@
 const express = require("express")
 const mongoose = require("mongoose")
+const snarkdown = require('snarkdown')
 const question = require("../models/question")
-
 router = express.Router()
 
 // get all questions
@@ -18,6 +18,8 @@ exports.getQuestions = (req, res) => {
 
 exports.postQuestion = (req, res) => {
   const Data = mongoose.model("questions", question)
+
+  let html = snarkdown(req.body.detailedAnswer)
 
   const newData = new Data({
     questionId: req.body.questionId,
@@ -37,7 +39,7 @@ exports.postQuestion = (req, res) => {
         chapterName: req.body.chapterName,
         chapterInfo: req.body.chapterInfo,
         correctOption: req.body.correctOption,
-        detailedAnswer: req.body.detailedAnswer,
+        detailedAnswer: html
       },
     },
   })
