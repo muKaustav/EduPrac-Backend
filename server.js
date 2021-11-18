@@ -5,6 +5,7 @@ const express = require("express")
 const mongoose = require("mongoose")
 const bodyParser = require("body-parser")
 const questionRoute = require("./routes/questionRoute")
+const userRoute = require("./routes/userRoute")
 
 const app = express()
 
@@ -20,6 +21,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static(__dirname + '/pages'))
 
 app.use("/", questionRoute)
+app.use("/", userRoute)
 app.get("/admin", (req, res) => {
   res.sendFile(path.join(__dirname, "pages", "admin.html"))
 })

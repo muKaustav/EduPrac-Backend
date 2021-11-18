@@ -3,14 +3,13 @@ const crypto = require('crypto')
 const express = require('express')
 const mongoose = require('mongoose')
 const snarkdown = require('snarkdown')
-const question = require('../models/question')
+const question = require('../models/Question')
 router = express.Router()
 
 function sha256(data) {
   return crypto.createHash('sha256').update(data).digest('hex')
 }
 
-// get all questions
 exports.getQuestions = (req, res) => {
   const Data = mongoose.model('questions', question)
   Data.find({}, (err, found) => {
