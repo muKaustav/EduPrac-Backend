@@ -3,7 +3,7 @@ const crypto = require('crypto')
 const express = require('express')
 const mongoose = require('mongoose')
 const snarkdown = require('snarkdown')
-const question = require('../models/Question.js')
+const question = require('../models/Question')
 router = express.Router()
 
 function sha256(data) {

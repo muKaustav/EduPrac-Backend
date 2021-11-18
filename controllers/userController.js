@@ -1,6 +1,6 @@
 const express = require('express')
 const mongoose = require('mongoose')
-const user = require('../models/User.js')
+const user = require('../models/User')
 router = express.Router()
 
 exports.getUsers = (req, res) => {
