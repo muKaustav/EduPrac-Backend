@@ -1,13 +1,10 @@
 const express = require("express")
 const questionRoute = require("../controllers/questionController")
+const checkAdminLoggedIn = require("../middleware/adminAuth")
 
 router = express.Router()
 
-const checkUserLoggedIn = (req, res, next) => {
-    req.user ? next() : res.sendStatus(401)
-}
-
-router.get("/questions", checkUserLoggedIn, questionRoute.getQuestions)
-router.post("/questions", questionRoute.postQuestion)
+router.get("/questions", checkAdminLoggedIn, questionRoute.getQuestions)
+router.post("/questions", checkAdminLoggedIn, questionRoute.postQuestion)
 
 module.exports = router

@@ -1,14 +1,12 @@
 const express = require("express")
 const userRoute = require("../controllers/userController")
+const checkUserLoggedIn = require("../middleware/userAuth")
+const checkAdminLoggedIn = require("../middleware/adminAuth")
 
 router = express.Router()
 
-const checkUserLoggedIn = (req, res, next) => {
-    req.user ? next() : res.sendStatus(401)
-}
-
-router.get("/users", checkUserLoggedIn, userRoute.getUsers)
+router.get("/users", checkAdminLoggedIn, userRoute.getUsers)
 router.post("/user", userRoute.postUser)
-router.post("/userQuestions", userRoute.postUserQuestions)
+router.post("/userQuestion", checkUserLoggedIn, userRoute.postUserQuestion)
 
 module.exports = router

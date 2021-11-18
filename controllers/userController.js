@@ -38,30 +38,28 @@ exports.postUser = (req, res) => {
     })
 }
 
-exports.postUserQuestions = (req, res) => {
+exports.postUserQuestion = async (req, res) => {
     const Data = mongoose.model('users', user)
 
-    Data.findOneAndUpdate({ userId: req.body.userId }, {
-        $set: {
-            questions: {
-                bookmarkedQuestions: [{ uuid: req.body.questions.bookmarkedQuestions[0]['uuid'] }],
-                attemptedQuestions: [{
-                    uuid: req.body.questions.attemptedQuestions[0]['uuid'],
-                    difficulty: req.body.questions.attemptedQuestions[0]['difficulty'],
-                    ease: req.body.questions.attemptedQuestions[0]['ease'],
-                    current_lvl: req.body.questions.attemptedQuestions[0]['current_lvl'],
-                    attempts: [{
-                        date: req.body.questions.attemptedQuestions[0]['attempts'][0]['date'],
-                        accessibleOn: req.body.questions.attemptedQuestions[0]['attempts'][0]['accessibleOn']
-                    }]
-                }]
-            }
-        }
-    }, (err, found) => {
+    let doc = await Data.findOne({ userId: req.headers.userid })
+
+    doc.questions.bookmarkedQuestions.push({ "uuid": req.body.questions.bookmarkedQuestions[0]['uuid'] })
+    doc.questions.attemptedQuestions.push({
+        "uuid": req.body.questions.attemptedQuestions[0]['uuid'],
+        "difficulty": req.body.questions.attemptedQuestions[0]['difficulty'],
+        "ease": req.body.questions.attemptedQuestions[0]['ease'],
+        "current_lvl": req.body.questions.attemptedQuestions[0]['current_lvl'],
+        "attempts": [{
+            "date": +new Date,
+            "accessibleOn": req.body.questions.attemptedQuestions[0]['attempts'][0]['accessibleOn']
+        }]
+    })
+
+    doc.save((err, saved) => {
         if (err) {
             res.send(err)
         } else {
-            res.send(found)
+            res.send(saved)
         }
     })
 }

@@ -9,11 +9,8 @@ const cookieSession = require('cookie-session')
 const questionRoute = require("./routes/questionRoute")
 const userRoute = require("./routes/userRoute")
 const authRoute = require("./routes/authRoute")
+const checkAdminLoggedIn = require("./middleware/adminAuth")
 require('./passport')
-
-function checkUserLoggedIn(req, res, next) {
-  req.user ? next() : res.sendStatus(401)
-}
 
 const app = express()
 
@@ -43,12 +40,16 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "pages", "login.html"))
 })
 
-app.get("/links", checkUserLoggedIn, (req, res) => {
+app.get("/links", checkAdminLoggedIn, (req, res) => {
   res.sendFile(path.join(__dirname, "pages", "links.html"))
 })
 
-app.get("/admin", checkUserLoggedIn, (req, res) => {
+app.get("/admin", checkAdminLoggedIn, (req, res) => {
   res.sendFile(path.join(__dirname, "pages", "admin.html"))
+})
+
+app.get("*", (req, res) => {
+  res.redirect("/")
 })
 
 PORT = process.env.PORT || 5000

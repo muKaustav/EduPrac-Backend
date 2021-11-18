@@ -14,8 +14,8 @@ const userSchema = new mongoose.Schema({
             ease: String,
             current_lvl: String,
             attempts: [{
-                date: String,
-                accessibleOn: String
+                date: Date,
+                accessibleOn: Date
             }]
         }]
     }
