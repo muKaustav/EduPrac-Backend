@@ -1,14 +1,11 @@
 const mongoose = require('mongoose')
 
 const UserSchema = new mongoose.Schema({
-    userId: String,
-    username: String,
-    gender: String,
-    email: String,
+    userId: { type: String, unique: true, required: true, dropDups: true },
+    username: { type: String, unique: true, required: true, dropDups: true },
+    email: { type: String, unique: true, required: true, dropDups: true },
     photoURL: String,
-    role: [{
-        name: String
-    }],
+    role: { type: String, unique: true, required: true, dropDups: true },
     questions: {
         bookmarkedQuestions: [{ uuid: String }],
         attemptedQuestions: [{

@@ -19,8 +19,7 @@ exports.postUser = (req, res) => {
 
     const newUser = new Data({
         userId: req.body.userId,
-        userName: req.body.userName,
-        gender: req.body.gender,
+        username: req.body.username,
         email: req.body.email,
         photoURL: req.body.photoURL,
         role: req.body.role,
