@@ -20,7 +20,7 @@ const questionSchema = new mongoose.Schema({
       correctOption: { type: String, unique: true, required: true, dropDups: true },
       detailedAnswer: { type: String, unique: true, required: true, dropDups: true },
     },
-  },
+  }
 })
 
 module.exports = questionSchema
