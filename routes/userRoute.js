@@ -4,7 +4,7 @@ const userRoute = require("../controllers/userController")
 router = express.Router()
 
 const checkUserLoggedIn = (req, res, next) => {
-    req.user ? next() : res.sendStatus(401)
+    req.user ? next() : res.sendStatus(500)
 }
 
 router.get("/users", checkUserLoggedIn, userRoute.getUsers)
