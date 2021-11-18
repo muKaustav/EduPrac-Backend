@@ -6,6 +6,9 @@ const UserSchema = new mongoose.Schema({
     gender: String,
     email: String,
     photoURL: String,
+    role: [{
+        name: String
+    }],
     questions: {
         bookmarkedQuestions: [{ uuid: String }],
         attemptedQuestions: [{
