@@ -70,7 +70,7 @@ exports.getDaily = async (req, res) => {
 
     let doc = await Data.findOne({ userId: req.headers.userid })
 
-    res.send(doc.dailyObjective)
+    res.json(doc.dailyObjective)
 }
 
 exports.postDaily = async (req, res) => {
