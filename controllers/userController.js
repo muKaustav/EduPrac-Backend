@@ -65,6 +65,14 @@ exports.postUserQuestion = async (req, res) => {
     })
 }
 
+exports.getDaily = async (req, res) => {
+    const Data = mongoose.model('users', user)
+
+    let doc = await Data.findOne({ userId: req.headers.userid })
+
+    res.send(doc.dailyObjective)
+}
+
 exports.postDaily = async (req, res) => {
     const Data = mongoose.model('users', user)
 
