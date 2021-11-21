@@ -6,6 +6,7 @@ const userSchema = new mongoose.Schema({
     email: { type: String, unique: true, required: true },
     photoURL: String,
     role: { type: String, required: true },
+    dailyObjective: Number,
     questions: {
         bookmarkedQuestions: [{ uuid: String }],
         attemptedQuestions: [{
