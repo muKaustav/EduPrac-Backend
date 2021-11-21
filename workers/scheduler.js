@@ -17,7 +17,7 @@ let resetDailyObjective = () => {
     })
 }
 
-cron.schedule('0 0 0 * * ?', () => {
+cron.schedule('40 1 * * *', () => {
     // reset daily objective every day at midnight
     resetDailyObjective()
-})
+})  
