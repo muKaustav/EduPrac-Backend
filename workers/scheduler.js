@@ -2,8 +2,8 @@ const cron = require('node-cron')
 const mongoose = require('mongoose')
 const user = require('../models/user')
 
-let resetDailyObjective = () => {
-    const Data = mongoose.model('Data', user)
+let resetDailyObjective = (req, res) => {
+    const Data = mongoose.model('users', user)
 
     Data.find({}, (err, data) => {
         if (err) {
@@ -13,11 +13,14 @@ let resetDailyObjective = () => {
                 user.dailyObjective = 0
                 user.save()
             })
+            res.send("Daily objectives reset.")
         }
     })
 }
 
-cron.schedule('36 1 * * *', () => {
+
+
+cron.schedule('48 1 * * *', () => {
     // reset daily objective every day at midnight
     resetDailyObjective()
-})  
+})
