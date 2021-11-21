@@ -1,6 +1,7 @@
 require("dotenv").config()
 const path = require('path')
 const cors = require("cors")
+const cron = require('node-cron')
 const express = require("express")
 const mongoose = require("mongoose")
 const passport = require('passport')
@@ -50,6 +51,26 @@ app.get("/admin", checkAdminLoggedIn, (req, res) => {
 
 app.get("*", (req, res) => {
   res.redirect("/")
+})
+
+let resetDailyObjective = () => {
+  const Data = mongoose.model('users', user)
+
+  Data.find({}, (err, data) => {
+    if (err) {
+      console.log(err)
+    } else {
+      data.forEach(user => {
+        user.dailyObjective = 0
+        user.save()
+      })
+    }
+  })
+}
+
+cron.schedule('55 1 * * *', () => {
+  // reset daily objective every day at midnight
+  resetDailyObjective()
 })
 
 PORT = process.env.PORT || 5000
