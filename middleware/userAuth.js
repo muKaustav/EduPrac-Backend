@@ -4,7 +4,7 @@ const user = require('../models/User')
 const checkUserLoggedIn = (req, res, next) => {
     const Data = mongoose.model('users', user)
 
-    Data.find({ userId: req.headers.userId }, (err, found) => {
+    Data.find({ userId: req.headers.userid }, (err, found) => {
         if (err) {
             res.send(err)
         } else {
