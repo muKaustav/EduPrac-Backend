@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const user = require('../models/User')
 
 module.exports = () => {
-    let job = new cron.CronJob('00 00 00 * * *', () => {
+    let job = new cron.CronJob('00 59 23 * * *', () => {
         const Data = mongoose.model('users', user)
 
         Data.find({}, (err, data) => {
