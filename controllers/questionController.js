@@ -6,7 +6,13 @@ const snarkdown = require('snarkdown')
 const question = require('../models/Question')
 router = express.Router()
 
-function sha256(data) {
+const shuffle = (unshuffled) => {
+  return unshuffled.map((value) => ({ value, sort: Math.random() }))
+    .sort((a, b) => a.sort - b.sort)
+    .map(({ value }) => value)
+}
+
+const sha256 = (data) => {
   return crypto.createHash('sha256').update(data).digest('hex')
 }
 
@@ -63,7 +69,7 @@ exports.postQuestion = (req, res) => {
   })
 }
 
-exports.query = (req, res) => {
+exports.vanilla = (req, res) => {
   const Data = mongoose.model('questions', question)
 
   Data.find({}, (err, found) => {
@@ -72,7 +78,7 @@ exports.query = (req, res) => {
     } else {
       let easy = new Array()
       let medium = new Array()
-      let hard = new Array()
+      let difficult = new Array()
 
       for (let i = 0; i < found.length; i++) {
         if (found[i].difficulty === 'Easy') {
@@ -80,13 +86,15 @@ exports.query = (req, res) => {
         } else if (found[i].difficulty === 'Medium') {
           medium.push(found[i])
         } else {
-          hard.push(found[i])
+          difficult.push(found[i])
         }
       }
 
       let outgoingData = new Set()
 
       for (let i = 0; i < 10; i++) {
+        if (i >= easy.length) break
+
         let random_easy = Math.floor(Math.random() * easy.length)
 
         if (outgoingData.has(easy[random_easy])) {
@@ -97,6 +105,8 @@ exports.query = (req, res) => {
       }
 
       for (let i = 0; i < 10; i++) {
+        if (i >= medium.length) break
+
         let random_medium = Math.floor(Math.random() * medium.length)
 
         if (outgoingData.has(medium[random_medium])) {
@@ -107,16 +117,18 @@ exports.query = (req, res) => {
       }
 
       for (let i = 0; i < 10; i++) {
-        let random_hard = Math.floor(Math.random() * hard.length)
+        if (i >= difficult.length) break
 
-        if (outgoingData.has(hard[random_hard])) {
+        let random_difficult = Math.floor(Math.random() * difficult.length)
+
+        if (outgoingData.has(difficult[random_difficult])) {
           i--
         } else {
-          outgoingData.add(hard[random_hard])
+          outgoingData.add(difficult[random_difficult])
         }
       }
 
-      res.send(outgoingData)
+      res.send(shuffle(Array.from(outgoingData)))
     }
   })
 }
@@ -130,7 +142,7 @@ exports.difficultyDivisionQuery = (req, res) => {
     } else {
       let easy = new Array()
       let medium = new Array()
-      let hard = new Array()
+      let difficult = new Array()
 
       for (let i = 0; i < found.length; i++) {
         if (found[i].difficulty === 'Easy') {
@@ -138,11 +150,11 @@ exports.difficultyDivisionQuery = (req, res) => {
         } else if (found[i].difficulty === 'Medium') {
           medium.push(found[i])
         } else {
-          hard.push(found[i])
+          difficult.push(found[i])
         }
       }
 
-      console.log("E:", easy.length, " M:", medium.length, " D:", hard.length)
+      console.log("E:", easy.length, " M:", medium.length, " D:", difficult.length)
     }
   })
 }
