@@ -44,7 +44,6 @@ exports.postUserQuestion = async (req, res) => {
 
     let doc = await Data.findOne({ userId: req.headers.userid })
 
-    doc.questions.bookmarkedQuestions.push({ "uuid": req.body.questions.bookmarkedQuestions[0]['uuid'] })
     doc.questions.attemptedQuestions.push({
         "uuid": req.body.questions.attemptedQuestions[0]['uuid'],
         "difficulty": req.body.questions.attemptedQuestions[0]['difficulty'],
@@ -55,6 +54,38 @@ exports.postUserQuestion = async (req, res) => {
             "accessibleOn": req.body.questions.attemptedQuestions[0]['attempts'][0]['accessibleOn']
         }]
     })
+
+    doc.save((err, saved) => {
+        if (err) {
+            res.send(err)
+        } else {
+            res.send(saved)
+        }
+    })
+}
+
+exports.addBookmark = async (req, res) => {
+    const Data = mongoose.model('users', user)
+
+    let doc = await Data.findOne({ userId: req.headers.userid })
+
+    doc.questions.bookmarkedQuestions.push({ "uuid": req.body.uuid })
+
+    doc.save((err, saved) => {
+        if (err) {
+            res.send(err)
+        } else {
+            res.send(saved)
+        }
+    })
+}
+
+exports.removeBookmark = async (req, res) => {
+    const Data = mongoose.model('users', user)
+
+    let doc = await Data.findOne({ userId: req.headers.userid })
+
+    doc.questions.bookmarkedQuestions = doc.questions.bookmarkedQuestions.filter(question => question.uuid !== req.body.uuid)
 
     doc.save((err, saved) => {
         if (err) {

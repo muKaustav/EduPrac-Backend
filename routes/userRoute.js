@@ -10,5 +10,7 @@ router.post("/user", userRoute.postUser)
 router.post("/userQuestion", checkUserLoggedIn, userRoute.postUserQuestion)
 router.get("/getDaily", checkUserLoggedIn, userRoute.getDaily)
 router.post("/postDaily", checkUserLoggedIn, userRoute.postDaily)
+router.post('/addBookmark', checkUserLoggedIn, userRoute.addBookmark)
+router.post('/removeBookmark', checkUserLoggedIn, userRoute.removeBookmark)
 
 module.exports = router
