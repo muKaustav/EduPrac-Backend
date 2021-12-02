@@ -23,7 +23,7 @@ exports.postUser = (req, res) => {
         email: req.body.email,
         photoURL: req.body.photoURL,
         role: req.body.role,
-        dailyObjective: req.body.dailyObjective,
+        dailyObjective: 0,
         questions: {
             bookmarkedQuestions: [],
             attemptedQuestions: []
@@ -44,6 +44,7 @@ exports.postUserQuestion = async (req, res) => {
 
     let doc = await Data.findOne({ userId: req.headers.userid })
 
+    doc.dailyObjective += 1
     doc.questions.attemptedQuestions.push({
         "uuid": req.body.questions.attemptedQuestions[0]['uuid'],
         "difficulty": req.body.questions.attemptedQuestions[0]['difficulty'],
@@ -102,20 +103,4 @@ exports.getDaily = async (req, res) => {
     let doc = await Data.findOne({ userId: req.headers.userid })
 
     res.json(doc.dailyObjective)
-}
-
-exports.postDaily = async (req, res) => {
-    const Data = mongoose.model('users', user)
-
-    let doc = await Data.findOne({ userId: req.headers.userid })
-
-    doc.dailyObjective += 1
-
-    doc.save((err, saved) => {
-        if (err) {
-            res.send(err)
-        } else {
-            res.send(saved)
-        }
-    })
 }
